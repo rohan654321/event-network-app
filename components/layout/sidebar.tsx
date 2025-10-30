@@ -14,6 +14,11 @@ import {
   Settings,
   LogOut,
   ChevronDown,
+  MessageSquare,
+  UserPlus,
+  BadgeCheck,
+  BookOpen,
+  FileText,
 } from "lucide-react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
@@ -30,36 +35,49 @@ const roleMenus = {
     { label: "Promotions", href: "/dashboard/superadmin/promotions", icon: Calendar },
     { label: "Settings", href: "/dashboard/superadmin/settings", icon: Settings },
   ],
-  organizer: [
-    { label: "Dashboard", href: "/dashboard/organizer", icon: LayoutDashboard },
-    { label: "Events", href: "/dashboard/organizer/events", icon: Calendar },
-    { label: "Registrations", href: "/dashboard/organizer/registrations", icon: Users },
-    { label: "Sessions", href: "/dashboard/organizer/sessions", icon: Mic2 },
-    { label: "Promotions", href: "/dashboard/organizer/promotions", icon: BarChart3 },
-    { label: "Analytics", href: "/dashboard/organizer/analytics", icon: BarChart3 },
-  ],
+// In the organizer menu array, add:
+organizer: [
+  { label: "Dashboard", href: "/dashboard/organizer", icon: LayoutDashboard },
+  { label: "Events", href: "/dashboard/organizer/events", icon: Calendar },
+  { label: "Registrations", href: "/dashboard/organizer/registrations", icon: Users },
+  { label: "Sessions", href: "/dashboard/organizer/sessions", icon: Mic2 },
+  { label: "Promotions", href: "/dashboard/organizer/promotions", icon: BarChart3 },
+  { label: "Analytics", href: "/dashboard/organizer/analytics", icon: BarChart3 },
+  { label: "Connections", href: "/dashboard/organizer/connections", icon: UserPlus },
+  { label: "Messages", href: "/dashboard/organizer/messages", icon: MessageSquare },
+  { label: "Legal Documents", href: "/dashboard/organizer/legal-documents", icon: FileText }, // New
+  { label: "Exhibitor Manuals", href: "/dashboard/organizer/exhibitor-manuals", icon: BookOpen }, // New
+  { label: "Badge Management", href: "/dashboard/organizer/badges", icon: BadgeCheck }, // New
+],
   "venue-manager": [
     { label: "Dashboard", href: "/dashboard/venue-manager", icon: LayoutDashboard },
     { label: "Venues", href: "/dashboard/venue-manager/venues", icon: Building2 },
     { label: "Bookings", href: "/dashboard/venue-manager/bookings", icon: Calendar },
     { label: "Promotions", href: "/dashboard/venue-manager/promotions", icon: BarChart3 },
+    { label: "Connections", href: "/dashboard/venue-manager/connections", icon: UserPlus },
+    { label: "Messages", href: "/dashboard/venue-manager/messages", icon: MessageSquare },
   ],
   speaker: [
     { label: "Dashboard", href: "/dashboard/speaker", icon: LayoutDashboard },
     { label: "Sessions", href: "/dashboard/speaker/sessions", icon: Mic2 },
     { label: "Materials", href: "/dashboard/speaker/materials", icon: Calendar },
     { label: "Feedback", href: "/dashboard/speaker/feedback", icon: BarChart3 },
+    { label: "Connections", href: "/dashboard/speaker/connections", icon: UserPlus },
+    { label: "Messages", href: "/dashboard/speaker/messages", icon: MessageSquare },
   ],
   exhibitor: [
     { label: "Dashboard", href: "/dashboard/exhibitor", icon: LayoutDashboard },
     { label: "Booths", href: "/dashboard/exhibitor/booths", icon: Store },
     { label: "Appointments", href: "/dashboard/exhibitor/appointments", icon: Calendar },
+    { label: "Connections", href: "/dashboard/exhibitor/connections", icon: UserPlus },
+    { label: "Messages", href: "/dashboard/exhibitor/messages", icon: MessageSquare },
   ],
   attendee: [
     { label: "Dashboard", href: "/dashboard/attendee", icon: LayoutDashboard },
     { label: "My Events", href: "/dashboard/attendee/events", icon: Calendar },
-    { label: "Connections", href: "/dashboard/attendee/connections", icon: Users },
+    { label: "Connections", href: "/dashboard/attendee/connections", icon: UserPlus },
     { label: "Appointments", href: "/dashboard/attendee/appointments", icon: Calendar },
+    { label: "Messages", href: "/dashboard/attendee/messages", icon: MessageSquare },
   ],
 }
 

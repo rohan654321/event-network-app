@@ -4,10 +4,18 @@ import { DashboardShell } from "@/components/layout/dashboard-shell"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Calendar, Users, Ticket, TrendingUp, Plus, Sparkles, Download, ThumbsUp, MessageSquare, Star } from "lucide-react"
+import { 
+  Calendar, Users, Ticket, TrendingUp, Plus, Sparkles, Download, 
+  ThumbsUp, MessageSquare, Star, BookOpen, Megaphone, Zap, Target, 
+  Clock, Award, BarChart3, Video, Globe, Mail, Bell, Settings, 
+  UserCheck, QrCode, Shield, Cloud, Wifi, Mic, Camera, Building,
+  FileText, Gift, BadgeCheck, MapPin, CreditCard, FileSearch,
+  ShieldCheck, Upload, Download as DownloadIcon, Send
+} from "lucide-react"
 import { AIInsightsDashboard } from "@/components/features/ai-insights-dashboard"
 import { AdvancedAnalytics } from "@/components/features/advanced-analytics"
 import { PollWidget } from "@/components/features/poll-widget"
+import { useState } from "react"
 
 // Define the AnalyticsData interface
 interface AnalyticsData {
@@ -36,6 +44,8 @@ interface AnalyticsData {
 }
 
 export default function OrganizerDashboard() {
+  const [activeTab, setActiveTab] = useState("overview")
+
   const stats = [
     {
       title: "Active Events",
@@ -67,6 +77,30 @@ export default function OrganizerDashboard() {
     },
   ]
 
+  const businessStats = [
+    {
+      title: "Total Revenue",
+      value: "$124,580",
+      change: "+18% this quarter",
+      icon: CreditCard,
+      color: "text-emerald-500",
+    },
+    {
+      title: "Active Promotions",
+      value: "8",
+      change: "3 campaigns running",
+      icon: Megaphone,
+      color: "text-pink-500",
+    },
+    {
+      title: "Venue Bookings",
+      value: "15",
+      change: "+3 this month",
+      icon: Building,
+      color: "text-indigo-500",
+    },
+  ]
+
   const upcomingEvents = [
     {
       id: "1",
@@ -74,6 +108,7 @@ export default function OrganizerDashboard() {
       date: "June 15-17, 2025",
       registrations: 1250,
       status: "published",
+      revenue: "$85,200"
     },
     {
       id: "2",
@@ -81,6 +116,7 @@ export default function OrganizerDashboard() {
       date: "June 22, 2025",
       registrations: 340,
       status: "published",
+      revenue: "$12,450"
     },
     {
       id: "3",
@@ -88,7 +124,35 @@ export default function OrganizerDashboard() {
       date: "July 5, 2025",
       registrations: 0,
       status: "draft",
+      revenue: "$0"
     },
+  ]
+
+  const recentActivities = [
+    {
+      type: "registration",
+      message: "New registration for Tech Summit",
+      time: "5 min ago",
+      icon: UserCheck
+    },
+    {
+      type: "payment",
+      message: "Payment received from Sarah Johnson",
+      time: "1 hour ago",
+      icon: CreditCard
+    },
+    {
+      type: "event",
+      message: "Design Workshop published",
+      time: "2 hours ago",
+      icon: Calendar
+    },
+    {
+      type: "promotion",
+      message: "New promotion campaign started",
+      time: "3 hours ago",
+      icon: Megaphone
+    }
   ]
 
   const eventPoll = {
@@ -134,7 +198,6 @@ export default function OrganizerDashboard() {
     ],
   }
 
-  // Fixed mock data for AI Insights that matches the expected types
   const mockAIMetrics = [
     {
       label: "Engagement Score",
@@ -186,6 +249,47 @@ export default function OrganizerDashboard() {
     { name: "Alex Wong", rating: 4.5, sessions: 14 },
   ]
 
+  const legalDocuments = [
+    {
+      name: "Event Contract Template",
+      type: "EVENT_CONTRACT",
+      status: "ACTIVE",
+      downloads: 45,
+      lastUpdated: "2024-01-15"
+    },
+    {
+      name: "Venue Safety Compliance",
+      type: "COMPLIANCE_CERTIFICATE",
+      status: "VALID",
+      downloads: 23,
+      lastUpdated: "2024-01-10"
+    },
+    {
+      name: "Terms & Conditions",
+      type: "STANDARD_DOCUMENT",
+      status: "ACTIVE",
+      downloads: 89,
+      lastUpdated: "2024-01-05"
+    }
+  ]
+
+  const exhibitorManuals = [
+    {
+      event: "Tech Summit 2025",
+      fileName: "Exhibitor_Manual_TechSummit2025.pdf",
+      version: "2.1",
+      uploadDate: "2024-01-18",
+      downloads: 67
+    },
+    {
+      event: "Design Workshop",
+      fileName: "Design_Workshop_Setup_Guide.pdf",
+      version: "1.0",
+      uploadDate: "2024-01-12",
+      downloads: 34
+    }
+  ]
+
   return (
     <DashboardShell role="organizer" title="Dashboard">
       {/* Stats Grid */}
@@ -207,17 +311,39 @@ export default function OrganizerDashboard() {
         })}
       </div>
 
+      {/* Business Stats */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        {businessStats.map((stat, index) => {
+          const Icon = stat.icon
+          return (
+            <Card key={index}>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
+                <Icon className={`w-4 h-4 ${stat.color}`} />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{stat.value}</div>
+                <p className="text-xs text-muted-foreground mt-1">{stat.change}</p>
+              </CardContent>
+            </Card>
+          )
+        })}
+      </div>
+
       {/* Tabs for Advanced Features */}
-      <Tabs defaultValue="overview" className="w-full">
-        <TabsList className="grid w-full grid-cols-4">
+      <Tabs defaultValue="overview" className="w-full" onValueChange={setActiveTab}>
+        <TabsList className="grid w-full grid-cols-4 lg:grid-cols-8 overflow-x-auto">
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="insights">AI Insights</TabsTrigger>
           <TabsTrigger value="analytics">Analytics</TabsTrigger>
           <TabsTrigger value="polls">Polls</TabsTrigger>
+          <TabsTrigger value="legal">Legal Docs</TabsTrigger>
+          <TabsTrigger value="manuals">Exhibitor Manuals</TabsTrigger>
+          <TabsTrigger value="badges">Badge Management</TabsTrigger>
+          <TabsTrigger value="settings">Settings</TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview" className="space-y-6 mt-6">
-          {/* Main Content */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Upcoming Events */}
             <div className="lg:col-span-2">
@@ -241,8 +367,8 @@ export default function OrganizerDashboard() {
                           <p className="text-sm text-muted-foreground">{event.date}</p>
                         </div>
                         <div className="text-right">
-                          <p className="font-bold">{event.registrations}</p>
-                          <p className="text-xs text-muted-foreground">registrations</p>
+                          <p className="font-bold">{event.registrations} registrations</p>
+                          <p className="text-sm text-muted-foreground">{event.revenue}</p>
                         </div>
                         <div className="ml-4">
                           <span
@@ -258,7 +384,7 @@ export default function OrganizerDashboard() {
               </Card>
             </div>
 
-            {/* Quick Actions */}
+            {/* Quick Actions & Recent Activity */}
             <div className="space-y-6">
               <Card>
                 <CardHeader>
@@ -277,6 +403,10 @@ export default function OrganizerDashboard() {
                     <Users className="w-4 h-4" />
                     Manage Attendees
                   </Button>
+                  <Button className="w-full justify-start gap-2" variant="outline">
+                    <FileText className="w-4 h-4" />
+                    Legal Documents
+                  </Button>
                 </CardContent>
               </Card>
 
@@ -285,18 +415,18 @@ export default function OrganizerDashboard() {
                   <CardTitle className="text-base">Recent Activity</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">New registration</span>
-                    <span className="text-xs">5 min ago</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Ticket purchased</span>
-                    <span className="text-xs">1 hour ago</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Event published</span>
-                    <span className="text-xs">2 hours ago</span>
-                  </div>
+                  {recentActivities.map((activity, index) => {
+                    const Icon = activity.icon
+                    return (
+                      <div key={index} className="flex justify-between items-center">
+                        <div className="flex items-center gap-2">
+                          <Icon className="w-4 h-4 text-muted-foreground" />
+                          <span className="text-muted-foreground">{activity.message}</span>
+                        </div>
+                        <span className="text-xs">{activity.time}</span>
+                      </div>
+                    )
+                  })}
                 </CardContent>
               </Card>
             </div>
@@ -339,6 +469,240 @@ export default function OrganizerDashboard() {
             isLive={eventPoll.isLive}
             onVote={(optionId) => console.log(`Voted for ${optionId}`)}
           />
+        </TabsContent>
+
+        <TabsContent value="legal" className="space-y-6 mt-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-2xl font-bold">Legal Documents Management</h2>
+            <Button className="gap-2">
+              <Upload className="w-4 h-4" />
+              Upload Document
+            </Button>
+          </div>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Legal Documents</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {legalDocuments.map((doc, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center justify-between p-4 border border-border rounded-lg"
+                  >
+                    <div className="flex items-center gap-3">
+                      <FileText className="w-5 h-5 text-blue-500" />
+                      <div>
+                        <p className="font-semibold">{doc.name}</p>
+                        <div className="flex gap-2 mt-1">
+                          <span className="text-xs px-2 py-1 bg-blue-100 text-blue-800 rounded">{doc.type}</span>
+                          <span className={`text-xs px-2 py-1 rounded ${
+                            doc.status === 'ACTIVE' ? 'bg-green-100 text-green-800' : 
+                            doc.status === 'VALID' ? 'bg-blue-100 text-blue-800' : 
+                            'bg-gray-100 text-gray-800'
+                          }`}>
+                            {doc.status}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <div className="text-right">
+                        <p className="text-sm font-medium">{doc.downloads} downloads</p>
+                        <p className="text-xs text-muted-foreground">Updated {doc.lastUpdated}</p>
+                      </div>
+                      <div className="flex gap-2">
+                        <Button size="sm" variant="outline">
+                          <DownloadIcon className="w-4 h-4" />
+                        </Button>
+                        <Button size="sm" variant="outline">
+                          <Send className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="manuals" className="space-y-6 mt-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-2xl font-bold">Exhibitor Manuals</h2>
+            <Button className="gap-2">
+              <Upload className="w-4 h-4" />
+              Upload Manual
+            </Button>
+          </div>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Event Manuals</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {exhibitorManuals.map((manual, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center justify-between p-4 border border-border rounded-lg"
+                  >
+                    <div className="flex items-center gap-3">
+                      <FileText className="w-5 h-5 text-purple-500" />
+                      <div>
+                        <p className="font-semibold">{manual.fileName}</p>
+                        <div className="flex gap-2 mt-1">
+                          <span className="text-xs text-muted-foreground">{manual.event}</span>
+                          <span className="text-xs px-2 py-1 bg-purple-100 text-purple-800 rounded">
+                            v{manual.version}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <div className="text-right">
+                        <p className="text-sm font-medium">{manual.downloads} downloads</p>
+                        <p className="text-xs text-muted-foreground">Uploaded {manual.uploadDate}</p>
+                      </div>
+                      <div className="flex gap-2">
+                        <Button size="sm" variant="outline">
+                          <DownloadIcon className="w-4 h-4" />
+                        </Button>
+                        <Button size="sm" variant="outline">
+                          <Send className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="badges" className="space-y-6 mt-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-2xl font-bold">Badge Management</h2>
+            <Button className="gap-2">
+              <BadgeCheck className="w-4 h-4" />
+              Generate Badges
+            </Button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Badge Statistics</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex justify-between">
+                  <span>Total Badges Generated</span>
+                  <span className="font-bold">1,245</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Badges Sent</span>
+                  <span className="font-bold">1,089</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Failed Deliveries</span>
+                  <span className="font-bold text-red-600">12</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Delivery Rate</span>
+                  <span className="font-bold text-green-600">99.2%</span>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Quick Actions</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                <Button className="w-full justify-start gap-2" variant="outline">
+                  <Send className="w-4 h-4" />
+                  Send All Badges
+                </Button>
+                <Button className="w-full justify-start gap-2" variant="outline">
+                  <DownloadIcon className="w-4 h-4" />
+                  Export Badge List
+                </Button>
+                <Button className="w-full justify-start gap-2" variant="outline">
+                  <BadgeCheck className="w-4 h-4" />
+                  Preview Badge Design
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+
+        <TabsContent value="settings" className="space-y-6 mt-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-2xl font-bold">Platform Settings</h2>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2">
+              <Card>
+                <CardHeader>
+                  <CardTitle>General Settings</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <p className="font-medium">Email Notifications</p>
+                        <p className="text-sm text-muted-foreground">Receive updates about your events</p>
+                      </div>
+                      <Button variant="outline">Configure</Button>
+                    </div>
+                    
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <p className="font-medium">SMS Alerts</p>
+                        <p className="text-sm text-muted-foreground">Important event alerts via SMS</p>
+                      </div>
+                      <Button variant="outline">Enable</Button>
+                    </div>
+                    
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <p className="font-medium">Auto-backup</p>
+                        <p className="text-sm text-muted-foreground">Automatically backup event data</p>
+                      </div>
+                      <Button variant="outline">Schedule</Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-base">Account Overview</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex justify-between">
+                    <span>Plan Type</span>
+                    <span className="font-bold">Professional</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Events This Month</span>
+                    <span className="font-bold">3/10</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Storage Used</span>
+                    <span className="font-bold">2.4GB/10GB</span>
+                  </div>
+                  <Button className="w-full" variant="outline">
+                    Upgrade Plan
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
         </TabsContent>
       </Tabs>
     </DashboardShell>

@@ -28,17 +28,17 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 
 interface SidebarProps {
-  role: "superadmin" | "organizer" | "venue-manager" | "speaker" | "exhibitor" | "attendee"
+  role:  "organizer" | "venue-manager" | "speaker" | "exhibitor" | "attendee"
 }
 
 const roleMenus = {
-  superadmin: [
-    { label: "Dashboard", href: "/dashboard/superadmin", icon: LayoutDashboard },
-    { label: "Users", href: "/dashboard/superadmin/users", icon: Users },
-    { label: "Analytics", href: "/dashboard/superadmin/analytics", icon: BarChart3 },
-    { label: "Promotions", href: "/dashboard/superadmin/promotions", icon: Calendar },
-    { label: "Settings", href: "/dashboard/superadmin/settings", icon: Settings },
-  ],
+  // superadmin: [
+  //   { label: "Dashboard", href: "/dashboard/superadmin", icon: LayoutDashboard },
+  //   { label: "Users", href: "/dashboard/superadmin/users", icon: Users },
+  //   { label: "Analytics", href: "/dashboard/superadmin/analytics", icon: BarChart3 },
+  //   { label: "Promotions", href: "/dashboard/superadmin/promotions", icon: Calendar },
+  //   { label: "Settings", href: "/dashboard/superadmin/settings", icon: Settings },
+  // ],
 // In the organizer menu array, add:
 organizer: [
   { label: "Dashboard", href: "/dashboard/organizer", icon: LayoutDashboard },

@@ -19,6 +19,10 @@ import {
   BadgeCheck,
   BookOpen,
   FileText,
+  Megaphone,
+  Plug,
+  TrendingUp,
+  User,
 } from "lucide-react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
@@ -49,22 +53,37 @@ organizer: [
   { label: "Exhibitor Manuals", href: "/dashboard/organizer/exhibitor-manuals", icon: BookOpen }, // New
   { label: "Badge Management", href: "/dashboard/organizer/badges", icon: BadgeCheck }, // New
 ],
-  "venue-manager": [
-    { label: "Dashboard", href: "/dashboard/venue-manager", icon: LayoutDashboard },
-    { label: "Venues", href: "/dashboard/venue-manager/venues", icon: Building2 },
-    { label: "Bookings", href: "/dashboard/venue-manager/bookings", icon: Calendar },
-    { label: "Promotions", href: "/dashboard/venue-manager/promotions", icon: BarChart3 },
-    { label: "Connections", href: "/dashboard/venue-manager/connections", icon: UserPlus },
-    { label: "Messages", href: "/dashboard/venue-manager/messages", icon: MessageSquare },
-  ],
+"venue-manager": [
+  { label: "Dashboard", href: "/dashboard/venue-manager", icon: LayoutDashboard },
+  { label: "Venues", href: "/dashboard/venue-manager/venues", icon: Building2 },
+  { label: "Bookings", href: "/dashboard/venue-manager/bookings", icon: Calendar },
+  { label: "Revenue & Payments", href: "/dashboard/venue-manager/payments", icon: BarChart3 },
+  { label: "Analytics & Reports", href: "/dashboard/venue-manager/analytics", icon: TrendingUp },
+  { label: "Team Management", href: "/dashboard/venue-manager/team", icon: Users },
+  { label: "Maintenance", href: "/dashboard/venue-manager/maintenance", icon: Settings },
+  { label: "Inquiries", href: "/dashboard/venue-manager/inquiries", icon: MessageSquare },
+  { label: "Contracts & Invoices", href: "/dashboard/venue-manager/invoices", icon: FileText },
+  { label: "Integrations", href: "/dashboard/venue-manager/integrations", icon: Plug },
+  { label: "Promotions", href: "/dashboard/venue-manager/promotions", icon: Megaphone },
+  { label: "Connections", href: "/dashboard/venue-manager/connections", icon: UserPlus },
+  { label: "Messages", href: "/dashboard/venue-manager/messages", icon: MessageSquare },
+  { label: "Settings", href: "/dashboard/venue-manager/settings", icon: Settings },
+],
   speaker: [
-    { label: "Dashboard", href: "/dashboard/speaker", icon: LayoutDashboard },
-    { label: "Sessions", href: "/dashboard/speaker/sessions", icon: Mic2 },
-    { label: "Materials", href: "/dashboard/speaker/materials", icon: Calendar },
-    { label: "Feedback", href: "/dashboard/speaker/feedback", icon: BarChart3 },
-    { label: "Connections", href: "/dashboard/speaker/connections", icon: UserPlus },
-    { label: "Messages", href: "/dashboard/speaker/messages", icon: MessageSquare },
-  ],
+  { label: "Dashboard", href: "/dashboard/speaker", icon: LayoutDashboard },
+  { label: "My Events", href: "/dashboard/speaker/events", icon: Calendar },
+  { label: "Sessions", href: "/dashboard/speaker/sessions", icon: Mic2 },
+  { label: "Materials", href: "/dashboard/speaker/materials", icon: BookOpen },
+  { label: "Media Uploads", href: "/dashboard/speaker/uploads", icon: FileText },
+  { label: "Q&A & Polls", href: "/dashboard/speaker/qa", icon: MessageSquare },
+  { label: "Analytics", href: "/dashboard/speaker/analytics", icon: TrendingUp },
+  { label: "Connections", href: "/dashboard/speaker/connections", icon: UserPlus },
+  { label: "Messages", href: "/dashboard/speaker/messages", icon: MessageSquare },
+  { label: "Contracts & Invoices", href: "/dashboard/speaker/contracts", icon: FileText },
+  { label: "Support", href: "/dashboard/speaker/support", icon: Settings },
+  { label: "Profile", href: "/dashboard/speaker/profile", icon: User },
+],
+
   exhibitor: [
     { label: "Dashboard", href: "/dashboard/exhibitor", icon: LayoutDashboard },
     { label: "Booths", href: "/dashboard/exhibitor/booths", icon: Store },
